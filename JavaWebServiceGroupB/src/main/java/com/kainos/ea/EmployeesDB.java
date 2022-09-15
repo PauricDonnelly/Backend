@@ -40,7 +40,7 @@ public class EmployeesDB {
                         "Properties file must exist and must contain "
                                 + "user, password, and host properties.");
             conn = DriverManager.getConnection("jdbc:mysql://"
-                    + host + "/GroupB_PaulinaS?useSSL=false", user, password);
+                    + host + "/GroupWeek2_ConorMcG?useSSL=false", user, password);
             return conn;
 
         } catch (Exception e) {
@@ -53,7 +53,7 @@ public class EmployeesDB {
         try {
             Connection con = EmployeesDB.getConnection();  // Bad practices alert!
             Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM Employee e, SalesEmployee s WHERE e.emp_id = s.se_id;");
+            ResultSet rs = st.executeQuery("SELECT DISTINCT * FROM Employee e, SalesEmployee s WHERE e.emp_id = s.se_id;");
             while (rs.next()) {
                 Employee resp = new Employee(rs.getInt("emp_id"),
                         rs.getDouble("salary"),
@@ -65,7 +65,21 @@ public class EmployeesDB {
                         rs.getString("email"));
                 emps.add(resp);
             }
-            rs = st.executeQuery("SELECT * FROM Employee e, DeliveryEmployee d WHERE e.emp_id = d.de_id;");
+            rs = st.executeQuery("SELECT DISTINCT * FROM Employee e, DeliveryEmployee d WHERE e.emp_id = d.de_id;");
+            while (rs.next()) {
+                Employee resp = new Employee(rs.getInt("emp_id"),
+                        rs.getDouble("salary"),
+                        rs.getString("fname"),
+                        rs.getString("lname"),
+                        rs.getString("bankAccountNumber"),
+                        rs.getString("NIN"),
+                        rs.getString("phoneNumber"),
+                        rs.getString("email"));
+                emps.add(resp);
+            }
+            rs = st.executeQuery("SELECT DISTINCT * FROM Employee e WHERE e.emp_id NOT IN " +
+                    "(SELECT d.de_id FROM DeliveryEmployee d) AND e.emp_id NOT IN" +
+                    "(SELECT s.se_id FROM SalesEmployee s)");
             while (rs.next()) {
                 Employee resp = new Employee(rs.getInt("emp_id"),
                         rs.getDouble("salary"),
