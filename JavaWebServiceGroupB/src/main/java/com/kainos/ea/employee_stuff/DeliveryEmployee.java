@@ -7,11 +7,11 @@ public class DeliveryEmployee extends Employee{
     private String image;
     private String favTech;
 
-    public DeliveryEmployee(@JsonProperty("emp_id")int emp_id, @JsonProperty("salary") double salary,
+    public DeliveryEmployee(@JsonProperty("salary") double salary,
                             @JsonProperty("firstname") String firstName, @JsonProperty("lastname") String lastName,
                             @JsonProperty("bankAccountNumber") String bankAccountNumber, @JsonProperty("niNumber") String niNumber,
                             @JsonProperty("phoneNumber") String phoneNumber, @JsonProperty("email") String email , @JsonProperty("Commision") float commissionRate, @JsonProperty("salesThisMonth") int salesTotal) {
-        super(emp_id, salary, firstName, lastName, bankAccountNumber, niNumber, phoneNumber, email);
+        super(salary, firstName, lastName, bankAccountNumber, niNumber, phoneNumber, email);
         this.cv = cv;
         this.image = image;
         this.favTech = favTech;

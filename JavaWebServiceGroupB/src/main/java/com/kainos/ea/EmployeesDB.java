@@ -1,6 +1,7 @@
 package com.kainos.ea;
 
 import com.kainos.ea.employee_stuff.Employee;
+import com.kainos.ea.employee_stuff.EmployeeRequest;
 import com.kainos.ea.employee_stuff.SalesEmployee;
 
 import java.io.FileInputStream;
@@ -55,7 +56,7 @@ public class EmployeesDB {
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery("SELECT DISTINCT * FROM Employee e, SalesEmployee s WHERE e.emp_id = s.se_id;");
             while (rs.next()) {
-                Employee resp = new Employee(rs.getInt("emp_id"),
+                Employee resp = new Employee(
                         rs.getDouble("salary"),
                         rs.getString("fname"),
                         rs.getString("lname"),
@@ -67,7 +68,7 @@ public class EmployeesDB {
             }
             rs = st.executeQuery("SELECT DISTINCT * FROM Employee e, DeliveryEmployee d WHERE e.emp_id = d.de_id;");
             while (rs.next()) {
-                Employee resp = new Employee(rs.getInt("emp_id"),
+                Employee resp = new Employee(
                         rs.getDouble("salary"),
                         rs.getString("fname"),
                         rs.getString("lname"),
@@ -81,7 +82,7 @@ public class EmployeesDB {
                     "(SELECT d.de_id FROM DeliveryEmployee d) AND e.emp_id NOT IN" +
                     "(SELECT s.se_id FROM SalesEmployee s)");
             while (rs.next()) {
-                Employee resp = new Employee(rs.getInt("emp_id"),
+                Employee resp = new Employee(
                         rs.getDouble("salary"),
                         rs.getString("fname"),
                         rs.getString("lname"),
@@ -97,7 +98,7 @@ public class EmployeesDB {
         return emps;
     }
 
-    public static String insertEmployees(Employee employee) {
+    public static String insertEmployees(EmployeeRequest employee) {
         try {
             Connection con = EmployeesDB.getConnection();  // Bad practices alert!
             Statement st = con.createStatement();
