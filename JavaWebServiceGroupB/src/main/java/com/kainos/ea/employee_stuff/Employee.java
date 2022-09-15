@@ -4,15 +4,15 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Employee implements Payable, Comparable<Employee> {
-    private int emp_id;
-
-    public int getEmp_id() {
-        return emp_id;
-    }
-
-    public void setEmp_id(int emp_id) {
-        this.emp_id = emp_id;
-    }
+//    private int emp_id;
+//
+//    public int getEmp_id() {
+//        return emp_id;
+//    }
+//
+//    public void setEmp_id(int emp_id) {
+//        this.emp_id = emp_id;
+//    }
 
     public void setSalary(double salary) {
         this.salary = salary;
@@ -102,19 +102,19 @@ public class Employee implements Payable, Comparable<Employee> {
         return number;
     }
 
-    public boolean setNumber(short thisNumber) {
+    public void setNumber(short thisNumber) {
         if (thisNumber > 0) {
             number = thisNumber;
-            return true;
+
         } else {
-            return false;
+
         }
     }
 
-    public boolean setNumber(String thisNumber) {
+    public void setNumber(String thisNumber) {
         try{
             short s = Short.parseShort(thisNumber);
-            return setNumber(s);
+
         } catch(NumberFormatException e){
             throw new BadNumber(e.getMessage());
         }
@@ -152,27 +152,12 @@ public class Employee implements Payable, Comparable<Employee> {
         return Double.compare(this.getSalary(), x.getSalary());
     }
 
-    @JsonCreator
-    public Employee( @JsonProperty("emp_id")int emp_id,@JsonProperty("salary") double salary,
-                     @JsonProperty("firstname") String firstName, @JsonProperty("lastname") String lastName,
-                     @JsonProperty("bankAccountNumber") String bankAccountNumber, @JsonProperty("niNumber") String niNumber,
-                     @JsonProperty("phoneNumber") String phoneNumber, @JsonProperty("email") String email) {
-
-        this.emp_id = emp_id;
-        this.salary = salary;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.bankAccountNumber = bankAccountNumber;
-        this.niNumber = niNumber;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-    }
 
     @JsonCreator
     public Employee(@JsonProperty("salary") double salary,
-                     @JsonProperty("firstname") String firstName, @JsonProperty("lastname") String lastName,
-                     @JsonProperty("bankAccountNumber") String bankAccountNumber, @JsonProperty("niNumber") String niNumber,
-                     @JsonProperty("phoneNumber") String phoneNumber, @JsonProperty("email") String email) {
+                    @JsonProperty("firstName") String firstName, @JsonProperty("lastName") String lastName,
+                    @JsonProperty("bankAccountNumber") String bankAccountNumber, @JsonProperty("niNumber") String niNumber,
+                    @JsonProperty("phoneNumber") String phoneNumber, @JsonProperty("email") String email) {
         this.salary = salary;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -181,6 +166,23 @@ public class Employee implements Payable, Comparable<Employee> {
         this.phoneNumber = phoneNumber;
         this.email = email;
     }
+//    @JsonCreator
+//    public Employee( @JsonProperty("emp_id")int emp_id,@JsonProperty("salary") double salary,
+//                     @JsonProperty("firstname") String firstName, @JsonProperty("lastname") String lastName,
+//                     @JsonProperty("bankAccountNumber") String bankAccountNumber, @JsonProperty("niNumber") String niNumber,
+//                     @JsonProperty("phoneNumber") String phoneNumber, @JsonProperty("email") String email) {
+//
+//        this.emp_id = emp_id;
+//        this.salary = salary;
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//        this.bankAccountNumber = bankAccountNumber;
+//        this.niNumber = niNumber;
+//        this.phoneNumber = phoneNumber;
+//        this.email = email;
+//    }
+
+
 
 
 }
