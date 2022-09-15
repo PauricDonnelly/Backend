@@ -4,6 +4,20 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Employee implements Payable, Comparable<Employee> {
+    private int emp_id;
+
+    public int getEmp_id() {
+        return emp_id;
+    }
+
+    public void setEmp_id(int emp_id) {
+        this.emp_id = emp_id;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
+    }
+
     private short number; // employee number
     protected double salary;   // employee salary in pence
     private String firstName;  // employee first name
@@ -139,11 +153,12 @@ public class Employee implements Payable, Comparable<Employee> {
     }
 
     @JsonCreator
-    public Employee( @JsonProperty("salary") double salary,
+    public Employee( @JsonProperty("emp_id")int emp_id,@JsonProperty("salary") double salary,
                      @JsonProperty("firstname") String firstName, @JsonProperty("lastname") String lastName,
                      @JsonProperty("bankAccountNumber") String bankAccountNumber, @JsonProperty("niNumber") String niNumber,
                      @JsonProperty("phoneNumber") String phoneNumber, @JsonProperty("email") String email) {
 
+        this.emp_id = emp_id;
         this.salary = salary;
         this.firstName = firstName;
         this.lastName = lastName;

@@ -21,9 +21,8 @@ public class WebService {
     @GET
     @Path("/reportEmployeeDetails")
     @Produces(MediaType.APPLICATION_JSON)
-    public String reportEmployeeDetails() {
-        String result = String.join("\n ", EmployeesDB.getEmployees());
-        return result;
+    public List<Employee> reportEmployeeDetails() {
+        return EmployeesDB.getEmployees();
     }
 
     @POST

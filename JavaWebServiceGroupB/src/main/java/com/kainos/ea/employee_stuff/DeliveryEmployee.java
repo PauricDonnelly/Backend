@@ -1,12 +1,17 @@
 package com.kainos.ea.employee_stuff;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class DeliveryEmployee extends Employee{
     private String cv;
     private String image;
     private String favTech;
 
-    public DeliveryEmployee( double salary, String firstName, String lastName, String bankAccountNumber, String niNumber, String phoneNumber, String email, String cv, String image, String favTech) {
-        super( salary, firstName, lastName, bankAccountNumber, niNumber, phoneNumber, email);
+    public DeliveryEmployee(@JsonProperty("emp_id")int emp_id, @JsonProperty("salary") double salary,
+                            @JsonProperty("firstname") String firstName, @JsonProperty("lastname") String lastName,
+                            @JsonProperty("bankAccountNumber") String bankAccountNumber, @JsonProperty("niNumber") String niNumber,
+                            @JsonProperty("phoneNumber") String phoneNumber, @JsonProperty("email") String email , @JsonProperty("Commision") float commissionRate, @JsonProperty("salesThisMonth") int salesTotal) {
+        super(emp_id, salary, firstName, lastName, bankAccountNumber, niNumber, phoneNumber, email);
         this.cv = cv;
         this.image = image;
         this.favTech = favTech;
