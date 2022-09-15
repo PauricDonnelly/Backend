@@ -2,6 +2,7 @@ package com.kainos.ea;
 
 import com.kainos.ea.employee_stuff.Employee;
 import com.kainos.ea.employee_stuff.EmployeeRequest;
+import com.kainos.ea.employee_stuff.EmployeeResponse;
 import com.kainos.ea.employee_stuff.SalesEmployee;
 
 import java.io.FileInputStream;
@@ -49,14 +50,14 @@ public class EmployeesDB {
         }
         return null;
     }
-    public static List<Employee> getEmployees() {
-        List<Employee> emps = new ArrayList<>();
+    public static List<EmployeeResponse> getEmployees() {
+        List<EmployeeResponse> emps = new ArrayList<>();
         try {
             Connection con = EmployeesDB.getConnection();  // Bad practices alert!
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery("SELECT DISTINCT * FROM Employee e, SalesEmployee s WHERE e.emp_id = s.se_id;");
             while (rs.next()) {
-                Employee resp = new Employee(
+                EmployeeResponse resp = new EmployeeResponse(rs.getInt("emp_id"),
                         rs.getDouble("salary"),
                         rs.getString("fname"),
                         rs.getString("lname"),
@@ -68,7 +69,7 @@ public class EmployeesDB {
             }
             rs = st.executeQuery("SELECT DISTINCT * FROM Employee e, DeliveryEmployee d WHERE e.emp_id = d.de_id;");
             while (rs.next()) {
-                Employee resp = new Employee(
+                EmployeeResponse resp = new EmployeeResponse(rs.getInt("emp_id"),
                         rs.getDouble("salary"),
                         rs.getString("fname"),
                         rs.getString("lname"),
@@ -82,7 +83,7 @@ public class EmployeesDB {
                     "(SELECT d.de_id FROM DeliveryEmployee d) AND e.emp_id NOT IN" +
                     "(SELECT s.se_id FROM SalesEmployee s)");
             while (rs.next()) {
-                Employee resp = new Employee(
+                EmployeeResponse resp = new EmployeeResponse(rs.getInt("emp_id"),
                         rs.getDouble("salary"),
                         rs.getString("fname"),
                         rs.getString("lname"),

@@ -3,6 +3,7 @@ package com.kainos.ea.resources;
 import com.kainos.ea.EmployeesDB;
 import com.kainos.ea.employee_stuff.Employee;
 import com.kainos.ea.employee_stuff.EmployeeRequest;
+import com.kainos.ea.employee_stuff.EmployeeResponse;
 import com.kainos.ea.employee_stuff.SalesEmployee;
 
 import javax.ws.rs.*;
@@ -22,7 +23,7 @@ public class WebService {
     @GET
     @Path("/reportEmployeeDetails")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Employee> reportEmployeeDetails() {
+    public List<EmployeeResponse> reportEmployeeDetails() {
         return EmployeesDB.getEmployees();
     }
 
