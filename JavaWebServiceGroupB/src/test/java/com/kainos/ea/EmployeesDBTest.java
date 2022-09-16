@@ -1,6 +1,7 @@
 package com.kainos.ea;
 
 import com.kainos.ea.employee_stuff.Employee;
+import com.kainos.ea.employee_stuff.EmployeeResponse;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -22,8 +23,8 @@ public class EmployeesDBTest {
     @Test
     public void getEmployeesTest() {
 
-        List<String> emps1 = new ArrayList<>();
-        List<String> newEmps1= new ArrayList<>();
+        List<EmployeeResponse> emps1 = new ArrayList<>();
+        List<EmployeeResponse> newEmps1= new ArrayList<>();
 
         emps1 = EmployeesDB.getEmployees();
         newEmps1 = EmployeesDB.getEmployees();
